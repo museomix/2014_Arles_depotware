@@ -1,0 +1,134 @@
+#:kivy 1.0
+#:import math math
+#:set title_color [102./255., 194./255., 204./255, 1]
+
+
+
+<BaseScreen>:
+	canvas.before:
+		Color:
+			rgb: 0, 0, 0
+		Rectangle:
+			pos: self.pos
+			size: self.size
+		StencilPush
+		Color:
+			rgb: 0, 0, 0
+		Rectangle:
+			size: self.size
+		StencilUse
+		Rectangle:
+			size: self.size
+	canvas.after:
+		StencilPop
+
+
+<CarouselItem>:
+
+	canvas.before:
+		Color:
+			rgb: 1, 1, 1
+		Rectangle:
+			source: root.source
+			pos: self.pos
+			size: self.size
+
+
+<CarouselImagesItem>:
+
+	on_touch_up: root.change_pic()
+	canvas.before:
+		Color:
+			rgb: 1, 1, 1
+		Rectangle:
+			source: root.source
+			pos: self.pos
+			size: self.size
+			
+<CarouselImagesItem2>:
+	Button:
+		text: 'valider'
+		on_press: root.validate()
+		#pos_hint: (None, None)
+		#pos: (30,30)
+
+<CarouselDoubleImagesItem>:
+
+	item1: item1
+	item2: item2
+
+	BoxLayout:
+		orientation: 'horizontal'
+		pos: (0,0)
+		size_hint: (None,None)
+		size: root.size
+
+		CarouselImagesItem:
+			view: root.view
+			app: root.app
+			id: item1
+			sources: root.sources1
+			source: root.source1
+			on_touch_up: root.validate()
+
+		CarouselImagesItem:
+			view: root.view
+			app: root.app
+			id: item2
+			sources: root.sources2
+			source: root.source2
+			on_touch_up: root.validate()
+
+		#Button:
+		#	size_hint: (None,None)
+		#	size: (100,200)
+		#	pos: (50,50)
+		#	text:'validate'
+		#	on_press: root.validate()
+
+
+<CarouselVideoItem>:
+	video: video
+
+	Video:
+		id: video
+		source: root.source
+		pos: root.pos
+		size_hint: (None,None)
+		size: root.size
+		play: False
+		autoplay: False
+		fullscreen: True
+		allow_stretch: True
+		#on_eos: root.do_on_eos() #root.replay(self)
+		on_touch_down: root.do_on_eos()
+
+
+<ProductLayout>:
+	circle: circle1
+	circle_pos: circle_pos
+
+	canvas.before:
+		Color:
+			rgb: 1, 1, 1
+		Rectangle:
+			source: root.background_image
+			pos: self.pos
+			size: self.size
+
+<ProduitCarousel>:
+	circle: circle1
+	circle_pos: circle_pos
+
+
+<WelcomeLayout>:
+
+	canvas.before:
+		Color:
+			rgb: 1, 1, 1
+		Rectangle:
+			source: 'background.jpg'
+			pos: self.pos
+			size: self.size
+
+
